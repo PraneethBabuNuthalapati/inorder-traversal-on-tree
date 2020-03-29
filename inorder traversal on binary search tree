@@ -1,0 +1,46 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+ int data;
+ struct node*left;
+struct node*right;
+};
+structnode*newNode(int item)
+{
+structnode*t=(struct node*)malloc(sizeof(structnode));
+t->data=item;
+t->left=t->right=NULL;
+return t;
+}
+struct node*insert(struct node*node,int value)
+{
+if(node==NULL)
+return newNode(value);
+if(value<node->data)
+ node->left=insert(node->left,value);
+else if(value>node->data)
+ node->right=insert(node->right,value);
+return node;
+}
+void inorder(struct node*root)
+{
+if(root==NULL)
+return;
+inorder(root->left);
+printf("%d->",root->data);
+inorder(root->right);
+}
+void main()
+{
+struct node*root=NULL;
+root=insert(root,48);
+insert(root,27);
+insert(root,15);
+insert(root,36);
+insert(root,67);
+insert(root,53);
+insert(root,89);
+printf("\n inorder traversal \n");
+inorder(root);
+}
